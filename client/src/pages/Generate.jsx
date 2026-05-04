@@ -1,7 +1,13 @@
 import { useState } from 'react';
+<<<<<<< HEAD
 import { Send, Copy, Loader2, Check, Database } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
+=======
+import axios from 'axios';
+import { Send, Copy, Loader2, Check, Database } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
 
 export default function Genarate() {
   const navigate = useNavigate();
@@ -14,6 +20,7 @@ export default function Genarate() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState('');
   const [copied, setCopied] = useState(false);
+<<<<<<< HEAD
   const [error, setError] = useState('');
 
   const userString = localStorage.getItem('user');
@@ -46,6 +53,31 @@ export default function Genarate() {
       } else {
         setResult('Error generating email. Please try again later.');
       }
+=======
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert("Please login to generate emails!");
+      navigate('/login');
+      return;
+    }
+
+    setLoading(true);
+    setResult('');
+    try {
+      const res = await axios.post('http://localhost:5001/api/email/generate', formData, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setResult(res.data.draft);
+    } catch (err) {
+      console.error(err);
+      if (err.response?.status === 401) {
+        navigate('/login');
+      }
+      setResult('Error generating email. Please try again or check backend connection.');
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
     } finally {
       setLoading(false);
     }
@@ -72,22 +104,37 @@ export default function Genarate() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">Email Topic / Purpose</label>
+<<<<<<< HEAD
               <textarea
+=======
+              <textarea 
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
                 required
                 className="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 text-slate-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all resize-none min-h-[120px]"
                 placeholder="e.g., Follow up on yesterday's meeting about the Q3 marketing strategy..."
                 value={formData.topic}
+<<<<<<< HEAD
                 onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
+=======
+                onChange={(e) => setFormData({...formData, topic: e.target.value})}
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">Tone</label>
+<<<<<<< HEAD
                 <select
                   className="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-blue-500 transition-all appearance-none"
                   value={formData.tone}
                   onChange={(e) => setFormData({ ...formData, tone: e.target.value })}
+=======
+                <select 
+                  className="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-blue-500 transition-all appearance-none"
+                  value={formData.tone}
+                  onChange={(e) => setFormData({...formData, tone: e.target.value})}
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
                 >
                   <option>Professional</option>
                   <option>Casual</option>
@@ -98,10 +145,17 @@ export default function Genarate() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">Audience</label>
+<<<<<<< HEAD
                 <select
                   className="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-blue-500 transition-all appearance-none"
                   value={formData.audience}
                   onChange={(e) => setFormData({ ...formData, audience: e.target.value })}
+=======
+                <select 
+                  className="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-blue-500 transition-all appearance-none"
+                  value={formData.audience}
+                  onChange={(e) => setFormData({...formData, audience: e.target.value})}
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
                 >
                   <option>Client</option>
                   <option>Colleague</option>
@@ -115,11 +169,16 @@ export default function Genarate() {
 
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">Additional Instructions (Optional)</label>
+<<<<<<< HEAD
               <input
+=======
+              <input 
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
                 type="text"
                 className="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-blue-500 transition-all"
                 placeholder="e.g., Mention the attached invoice, Keep it under 100 words..."
                 value={formData.additionalInstructions}
+<<<<<<< HEAD
                 onChange={(e) => setFormData({ ...formData, additionalInstructions: e.target.value })}
               />
             </div>
@@ -147,6 +206,23 @@ export default function Genarate() {
                 You've used all your daily credits. Come back tomorrow!
               </p>
             )}
+=======
+                onChange={(e) => setFormData({...formData, additionalInstructions: e.target.value})}
+              />
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={loading || !formData.topic}
+              className="w-full py-4 rounded-xl primary-gradient text-white font-bold text-lg hover:shadow-lg hover:shadow-blue-500/20 disabled:opacity-50 flex items-center justify-center gap-2 transition-all"
+            >
+              {loading ? (
+                <> <Loader2 className="w-5 h-5 animate-spin"/> Crafting Email... </>
+              ) : (
+                <> <Send className="w-5 h-5"/> Generate Email </>
+              )}
+            </button>
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
           </form>
         </div>
 
@@ -155,7 +231,11 @@ export default function Genarate() {
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-medium text-slate-200">Generated Draft</h2>
             {result && (
+<<<<<<< HEAD
               <button
+=======
+              <button 
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
                 onClick={copyToClipboard}
                 className="text-sm flex items-center gap-1 text-slate-400 hover:text-white transition-colors p-2"
               >
@@ -164,10 +244,17 @@ export default function Genarate() {
               </button>
             )}
           </div>
+<<<<<<< HEAD
 
           <div className="flex-grow bg-slate-950/50 rounded-xl p-4 border border-slate-800/50 text-slate-300 whitespace-pre-wrap overflow-y-auto">
             {result ? (
               result
+=======
+          
+          <div className="flex-grow bg-slate-950/50 rounded-xl p-4 border border-slate-800/50 text-slate-300 whitespace-pre-wrap overflow-y-auto">
+            {result ? (
+               result
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
             ) : (
               <div className="h-full flex flex-col items-center justify-center text-slate-500">
                 <Send className="w-12 h-12 mb-4 opacity-20" />

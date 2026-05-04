@@ -17,10 +17,14 @@ model User {
   password       String
   profileSummary String   @default("A professional writing style, tone is adaptable based on instructions.")
   role           Role     @default(USER)
+<<<<<<< HEAD
   aiCredits      Int      @default(10)
   lastReset      DateTime @default(now())
   createdAt      DateTime @default(now())
   updatedAt      DateTime @default(now()) @updatedAt
+=======
+  createdAt      DateTime @default(now())
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
   emails         Email[]
 }
 
@@ -28,9 +32,15 @@ model Email {
   id             String   @id @default(uuid())
   userId         String
   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+<<<<<<< HEAD
   topic          String?
   tone           String?
   audience       String?
+=======
+  topic          String
+  tone           String
+  audience       String
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
   content        String
   isImproved     Boolean  @default(false)
   createdAt      DateTime @default(now())

@@ -1,5 +1,9 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
 import { Mail, Sparkles, Wand2, History, Database, LogOut, User } from 'lucide-react';
+=======
+import { Mail, Sparkles, Wand2, History, Database, LogOut } from 'lucide-react';
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
 
 export default function Navbar() {
   const location = useLocation();
@@ -54,6 +58,7 @@ export default function Navbar() {
               >
                 <History className="w-4 h-4" /> History
               </Link>
+<<<<<<< HEAD
               <Link
                 to="/profile"
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-sm ${
@@ -62,6 +67,8 @@ export default function Navbar() {
               >
                 <User className="w-4 h-4" /> Profile
               </Link>
+=======
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
               {user.role === 'ADMIN' && (
                 <Link
                   to="/admin"
@@ -78,6 +85,7 @@ export default function Navbar() {
         
         <div className="flex gap-4 items-center">
           {user ? (
+<<<<<<< HEAD
             <div className="flex items-center gap-6">
               {/* AI Credits UI */}
               <div className="hidden sm:flex flex-col items-end gap-1">
@@ -105,6 +113,17 @@ export default function Navbar() {
                   <LogOut className="w-5 h-5" />
                 </button>
               </div>
+=======
+            <div className="flex items-center gap-4">
+              <span className="text-xs text-slate-500 hidden sm:block">{user.email}</span>
+              <button
+                onClick={logout}
+                className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-all"
+                title="Logout"
+              >
+                <LogOut className="w-5 h-5" />
+              </button>
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
             </div>
           ) : (
             <>

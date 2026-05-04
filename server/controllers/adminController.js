@@ -5,7 +5,11 @@ export const getUsers = async (req, res) => {
     const users = await prisma.user.findMany({
       select: { id: true, email: true, role: true, createdAt: true }
     });
+<<<<<<< HEAD
     if(!users || users.length === 0){
+=======
+    if(!users){
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
         return res.status(404).json({
             success: false,
             message: "No User found."
@@ -24,7 +28,11 @@ export const getEmails = async (req, res) => {
       include: { user: { select: { email: true } } },
       orderBy: { createdAt: 'desc' }
     });
+<<<<<<< HEAD
     if(!emails || emails.length === 0){
+=======
+    if(!emails){
+>>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
         return res.status(404).json({
             success: false,
             message: "No Emails found."
