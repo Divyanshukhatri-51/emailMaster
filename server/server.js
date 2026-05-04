@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-import "dotenv/config";
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";

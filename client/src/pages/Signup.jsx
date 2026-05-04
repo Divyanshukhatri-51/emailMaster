@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
 import api from '../services/api';
-=======
-import axios from 'axios';
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -17,7 +13,6 @@ const Signup = () => {
     e.preventDefault();
     setLoading(true);
     setError('');
-<<<<<<< HEAD
 
     try {
       const response = await api.post('/auth/signup', {
@@ -25,15 +20,6 @@ const Signup = () => {
         password,
       });
 
-=======
-    
-    try {
-      const response = await axios.post('http://localhost:5001/api/auth/signup', {
-        email,
-        password,
-      });
-      
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       navigate('/');
@@ -50,21 +36,13 @@ const Signup = () => {
         <h2 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
           Create Account
         </h2>
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
         {error && (
           <div className="p-4 mb-6 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
             {error}
           </div>
         )}
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-slate-400 mb-2">Email Address</label>
@@ -77,11 +55,7 @@ const Signup = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-<<<<<<< HEAD
 
-=======
-          
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
           <div>
             <label className="block text-sm font-medium text-slate-400 mb-2">Password</label>
             <input
@@ -93,11 +67,7 @@ const Signup = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-<<<<<<< HEAD
 
-=======
-          
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
           <button
             type="submit"
             disabled={loading}
@@ -106,11 +76,7 @@ const Signup = () => {
             {loading ? 'Creating Account...' : 'Sign Up'}
           </button>
         </form>
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
         <p className="mt-8 text-center text-slate-400 text-sm">
           Already have an account?{' '}
           <Link to="/login" className="text-blue-400 hover:text-blue-300 font-medium">

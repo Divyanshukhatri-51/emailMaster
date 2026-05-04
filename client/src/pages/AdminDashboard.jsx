@@ -1,13 +1,7 @@
 import { useState, useEffect } from 'react';
-<<<<<<< HEAD
 import { Users, Mail, Trash2, Loader2, Database } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
-=======
-import axios from 'axios';
-import { Users, Mail, Trash2, Loader2, Database } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -19,39 +13,18 @@ export default function AdminDashboard() {
   useEffect(() => {
     const userString = localStorage.getItem('user');
     const user = userString ? JSON.parse(userString) : null;
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
     if (!user || user.role !== 'ADMIN') {
       navigate('/');
       return;
     }
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
     fetchData();
   }, [navigate]);
 
   const fetchData = async () => {
     try {
-<<<<<<< HEAD
       const [usersRes, emailsRes] = await Promise.all([
         api.get('/admin/users'),
         api.get('/admin/emails')
-=======
-      const token = localStorage.getItem('token');
-      const [usersRes, emailsRes] = await Promise.all([
-        axios.get('http://localhost:5001/api/admin/users', {
-          headers: { Authorization: `Bearer ${token}` }
-        }),
-        axios.get('http://localhost:5001/api/admin/emails', {
-          headers: { Authorization: `Bearer ${token}` }
-        })
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
       ]);
       setUsers(usersRes.data.users);
       setEmails(emailsRes.data.emails);
@@ -65,14 +38,7 @@ export default function AdminDashboard() {
   const deleteUser = async (id) => {
     if (!window.confirm('Are you sure you want to delete this user?')) return;
     try {
-<<<<<<< HEAD
       await api.delete(`/admin/users/${id}`);
-=======
-      const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5001/api/admin/users/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
       fetchData();
     } catch (err) {
       console.error('Error deleting user:', err);
@@ -83,14 +49,7 @@ export default function AdminDashboard() {
   const deleteEmail = async (id) => {
     if (!window.confirm('Are you sure you want to delete this email?')) return;
     try {
-<<<<<<< HEAD
       await api.delete(`/admin/emails/${id}`);
-=======
-      const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5001/api/admin/emails/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
       fetchData();
     } catch (err) {
       console.error('Error deleting email:', err);
@@ -118,27 +77,15 @@ export default function AdminDashboard() {
       <div className="flex gap-4 mb-6">
         <button
           onClick={() => setActiveTab('users')}
-<<<<<<< HEAD
           className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${activeTab === 'users' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
             }`}
-=======
-          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
-            activeTab === 'users' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-          }`}
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
         >
           <Users className="w-4 h-4" /> Users ({users.length})
         </button>
         <button
           onClick={() => setActiveTab('emails')}
-<<<<<<< HEAD
           className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${activeTab === 'emails' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
             }`}
-=======
-          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
-            activeTab === 'emails' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-          }`}
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
         >
           <Mail className="w-4 h-4" /> Emails ({emails.length})
         </button>

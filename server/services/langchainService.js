@@ -29,17 +29,10 @@ export const generateEmail = async ({
     
     USER WRITING STYLE (Emulate this nature): {userNature}
     
-<<<<<<< HEAD
     Topic: ${topic}
     Tone: ${tone}
     Audience: ${audience}
     Additional Instructions: ${additionalInstructions}
-=======
-    Topic: {topic}
-    Tone: {tone}
-    Audience: {audience}
-    Additional Instructions: {additionalInstructions}
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
 
     Do not include any pleasantries before or after the email like "Here is your email:". Only output the subject line and the email body.`
   );
@@ -62,15 +55,9 @@ export const improveEmail = async ({ originalEmail, instructions = '' }) => {
     `You are an expert professional copywriter. Please review and improve the following email draft. Make it sound more professional, fix any grammatical errors, and ensure it flows well.
     
     Original Email:
-<<<<<<< HEAD
     ${originalEmail}
 
     Specific Instructions: ${instructions}
-=======
-    {originalEmail}
-
-    Specific Instructions: {instructions}
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
 
     Do not include any pleasantries before or after the email like "Here is the improved email:". Only output the subject line and the improved email body.`
   );

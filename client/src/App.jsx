@@ -8,10 +8,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import History from './pages/History';
 import AdminDashboard from './pages/AdminDashboard';
-<<<<<<< HEAD
 import Profile from './pages/Profile';
-=======
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
 
 function App() {
   return (
@@ -26,10 +23,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/history" element={<History />} />
-<<<<<<< HEAD
             <Route path="/profile" element={<Profile />} />
-=======
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </main>

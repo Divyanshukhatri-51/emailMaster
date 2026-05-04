@@ -1,15 +1,11 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
 import { Mail, Sparkles, Wand2, History, Database, LogOut, User } from 'lucide-react';
-=======
-import { Mail, Sparkles, Wand2, History, Database, LogOut } from 'lucide-react';
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
 
 export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const isActive = (path) => location.pathname === path;
-  
+
   const userString = localStorage.getItem('user');
   const user = userString ? JSON.parse(userString) : null;
 
@@ -36,45 +32,37 @@ export default function Navbar() {
             <div className="hidden md:flex gap-4">
               <Link
                 to="/generate"
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-sm ${
-                  isActive('/generate') ? 'bg-blue-600/20 text-blue-400' : 'hover:bg-slate-800 text-slate-300'
-                }`}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-sm ${isActive('/generate') ? 'bg-blue-600/20 text-blue-400' : 'hover:bg-slate-800 text-slate-300'
+                  }`}
               >
                 <Wand2 className="w-4 h-4" /> Generate
               </Link>
               <Link
                 to="/improve"
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-sm ${
-                  isActive('/improve') ? 'bg-indigo-600/20 text-indigo-400' : 'hover:bg-slate-800 text-slate-300'
-                }`}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-sm ${isActive('/improve') ? 'bg-indigo-600/20 text-indigo-400' : 'hover:bg-slate-800 text-slate-300'
+                  }`}
               >
                 <Sparkles className="w-4 h-4" /> Improve
               </Link>
               <Link
                 to="/history"
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-sm ${
-                  isActive('/history') ? 'bg-emerald-600/20 text-emerald-400' : 'hover:bg-slate-800 text-slate-300'
-                }`}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-sm ${isActive('/history') ? 'bg-emerald-600/20 text-emerald-400' : 'hover:bg-slate-800 text-slate-300'
+                  }`}
               >
                 <History className="w-4 h-4" /> History
               </Link>
-<<<<<<< HEAD
               <Link
                 to="/profile"
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-sm ${
-                  isActive('/profile') ? 'bg-blue-600/20 text-blue-400' : 'hover:bg-slate-800 text-slate-300'
-                }`}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-sm ${isActive('/profile') ? 'bg-blue-600/20 text-blue-400' : 'hover:bg-slate-800 text-slate-300'
+                  }`}
               >
                 <User className="w-4 h-4" /> Profile
               </Link>
-=======
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
               {user.role === 'ADMIN' && (
                 <Link
                   to="/admin"
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-sm ${
-                    isActive('/admin') ? 'bg-orange-600/20 text-orange-400' : 'hover:bg-slate-800 text-slate-300'
-                  }`}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-sm ${isActive('/admin') ? 'bg-orange-600/20 text-orange-400' : 'hover:bg-slate-800 text-slate-300'
+                    }`}
                 >
                   <Database className="w-4 h-4" /> Admin
                 </Link>
@@ -82,21 +70,20 @@ export default function Navbar() {
             </div>
           )}
         </div>
-        
+
         <div className="flex gap-4 items-center">
           {user ? (
-<<<<<<< HEAD
             <div className="flex items-center gap-6">
               {/* AI Credits UI */}
               <div className="hidden sm:flex flex-col items-end gap-1">
                 <div className="flex items-center gap-2">
-                   <span className="text-[10px] uppercase font-bold text-slate-500">AI Credits</span>
-                   <span className={`text-xs font-bold ${user.aiCredits > 3 ? 'text-blue-400' : 'text-orange-400'}`}>
-                     {user.aiCredits}/10
-                   </span>
+                  <span className="text-[10px] uppercase font-bold text-slate-500">AI Credits</span>
+                  <span className={`text-xs font-bold ${user.aiCredits > 3 ? 'text-blue-400' : 'text-orange-400'}`}>
+                    {user.aiCredits}/10
+                  </span>
                 </div>
                 <div className="w-24 h-1.5 bg-slate-800 rounded-full overflow-hidden border border-slate-700/50">
-                  <div 
+                  <div
                     className={`h-full transition-all duration-500 ${user.aiCredits > 3 ? 'bg-blue-500' : 'bg-orange-500'}`}
                     style={{ width: `${(user.aiCredits / 10) * 100}%` }}
                   />
@@ -113,17 +100,6 @@ export default function Navbar() {
                   <LogOut className="w-5 h-5" />
                 </button>
               </div>
-=======
-            <div className="flex items-center gap-4">
-              <span className="text-xs text-slate-500 hidden sm:block">{user.email}</span>
-              <button
-                onClick={logout}
-                className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-all"
-                title="Logout"
-              >
-                <LogOut className="w-5 h-5" />
-              </button>
->>>>>>> 1d0c79a07aa0b5e8a41dfffab4f34fff6ed1220d
             </div>
           ) : (
             <>
