@@ -1,0 +1,12 @@
+node_modules
+npm-debug.log
+.env
+Dockerfile
+.dockerignore
+.git
+.gitignore
+.vscode
+.DS_Store
+prisma/migrations
+*.db
+*.db-journal

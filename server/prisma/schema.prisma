@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id             String   @id @default(uuid())
+  email          String   @unique
+  password       String
+  profileSummary String   @default("A professional writing style, tone is adaptable based on instructions.")
+  role           Role     @default(USER)
+  aiCredits      Int      @default(10)
+  lastReset      DateTime @default(now())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
+  emails         Email[]
+}
+
+model Email {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  topic          String?
+  tone           String?
+  audience       String?
+  content        String
+  isImproved     Boolean  @default(false)
+  createdAt      DateTime @default(now())
+}
