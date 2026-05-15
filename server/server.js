@@ -12,7 +12,7 @@ dotenv.config()
 const app = express();
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",").map(url => url.trim()) || [
-  "http://localhost:3001",
+  "https://auramail-iota.vercel.app",
   "http://localhost:5173",
 ];
 
