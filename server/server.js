@@ -38,7 +38,9 @@ const limiter = rateLimit({
   max: 100, // limit each IP to 100 requests per windowMs
 });
 app.use(limiter);
-
+app.get("/health", (req, res) => {
+  res.status(200).json({message: "Server is running"});
+})
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/email", emailRoutes);
@@ -53,4 +55,4 @@ if (process.env.NODE_ENV !== "production") {
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });
-}
+}
