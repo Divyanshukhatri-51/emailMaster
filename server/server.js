@@ -44,8 +44,13 @@ app.use("/api/auth", authRoutes);
 app.use("/api/email", emailRoutes);
 app.use("/api/admin", adminRoutes);
 
-const port = process.env.PORT || 5001;
+// Export the app for Vercel
+export default app;
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// Listen only if not in a serverless environment
+if (process.env.NODE_ENV !== "production") {
+  const port = process.env.PORT || 5001;
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+}
