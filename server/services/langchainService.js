@@ -27,7 +27,7 @@ export const generateEmail = async ({
   const promptTemplate = PromptTemplate.fromTemplate(
     `You are an expert professional copywriter. Write an email based on the following details.
     
-    USER WRITING STYLE (Emulate this nature): {userNature}
+    USER WRITING STYLE (Emulate this nature): ${userNature}
     
     Topic: ${topic}
     Tone: ${tone}
