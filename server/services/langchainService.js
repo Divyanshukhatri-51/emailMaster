@@ -27,12 +27,12 @@ export const generateEmail = async ({
   const promptTemplate = PromptTemplate.fromTemplate(
     `You are an expert professional copywriter. Write an email based on the following details.
     
-    USER WRITING STYLE (Emulate this nature): ${userNature}
+    USER WRITING STYLE (Emulate this nature): {userNature}
     
-    Topic: ${topic}
-    Tone: ${tone}
-    Audience: ${audience}
-    Additional Instructions: ${additionalInstructions}
+    Topic: {topic}
+    Tone: {tone}
+    Audience: {audience}
+    Additional Instructions: {additionalInstructions}
 
     Do not include any pleasantries before or after the email like "Here is your email:". Only output the subject line and the email body.`
   );
@@ -55,9 +55,9 @@ export const improveEmail = async ({ originalEmail, instructions = '' }) => {
     `You are an expert professional copywriter. Please review and improve the following email draft. Make it sound more professional, fix any grammatical errors, and ensure it flows well.
     
     Original Email:
-    ${originalEmail}
+    {originalEmail}
 
-    Specific Instructions: ${instructions}
+    Specific Instructions: {instructions}
 
     Do not include any pleasantries before or after the email like "Here is the improved email:". Only output the subject line and the improved email body.`
   );
