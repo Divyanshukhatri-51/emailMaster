@@ -66,7 +66,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
-          <p>© {new Date().getFullYear()} EmailGenius. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Auramail. All rights reserved.</p>
         </div>
       </div>
     </footer>
