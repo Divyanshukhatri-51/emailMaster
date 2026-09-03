@@ -13,7 +13,7 @@ export default function Footer() {
                 <Mail className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-bold bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-indigo-400">
-                EmailGenius
+                Auramail
               </span>
             </Link>
             <p className="text-slate-400 max-w-xs mb-6">
@@ -67,9 +67,6 @@ export default function Footer() {
 
         <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
           <p>© {new Date().getFullYear()} EmailGenius. All rights reserved.</p>
-          <p className="flex items-center gap-1">
-            Built with <Heart className="w-4 h-4 text-red-500" /> for modern professionals.
-          </p>
         </div>
       </div>
     </footer>
