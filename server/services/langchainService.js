@@ -5,15 +5,19 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+// Llama 3.x models were removed from many free Groq keys.
+// Use a currently available free-tier chat model (override with GROQ_MODEL).
+const groqModel =  'openai/gpt-oss-20b';
+
 let model;
 try {
   model = new ChatGroq({
     apiKey: process.env.GROQ_API_KEY,
-    model: 'llama-3.1-8b-instant',
+    model: groqModel,
     temperature: 0.7,
   });
-} catch(e) {
-  console.error("Failed to initialize Groq, check API key.");
+} catch (e) {
+  console.error('Failed to initialize Groq, check API key.', e.message);
 }
 
 export const generateEmail = async ({
