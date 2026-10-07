@@ -11,7 +11,7 @@ export default function Home() {
       <div className="container mx-auto px-4 pt-32 pb-20 relative z-10 flex flex-col items-center text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 mb-8 text-sm">
           <Sparkles className="w-4 h-4" />
-          <span>Powered by Groq & LLaMA 3</span>
+          <span>Powered by Groq & GPT-OSS 20</span>
         </div>
         
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8">
