@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Sparkles, Copy, Loader2, Check } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Sparkles, Copy, Loader2, Check, Wand2, ArrowRight } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
 import api from '../services/api';
+import SEO from '../components/SEO';
 
 export default function Improve() {
   const navigate = useNavigate();
@@ -55,23 +56,35 @@ export default function Improve() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto pt-10">
-      <div className="mb-10">
-        <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-linear-to-r from-indigo-400 to-purple-400 mb-2">
-          Improve Existing Draft
+    <div className="max-w-6xl mx-auto px-4 pt-10 pb-16">
+      <SEO
+        title="Improve & Polish Email Drafts with AI | Tone Perfector"
+        description="Refine and polish your existing email drafts with AuraMail's AI. Fix tone, grammar, clarity, and professionalism in one click."
+        canonical="/improve"
+        keywords="improve email tone, polish email draft, rewrite email ai, email tone changer, business email editor"
+      />
+
+      <header className="mb-10">
+        <h1 className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 mb-2">
+          AI Email Tone Improver
         </h1>
-        <p className="text-slate-400">Paste your rough draft, and let AI polish it to perfection.</p>
-      </div>
+        <p className="text-slate-400 text-sm sm:text-base">
+          Paste your draft, and let AuraMail's AI refine phrasing, clarity, and professionalism.
+        </p>
+      </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Input Form */}
-        <div className="glass-panel p-6">
+        <section aria-label="Email Draft Input" className="glass-panel p-6">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">Original Draft</label>
+              <label htmlFor="original-email" className="block text-sm font-medium text-slate-300 mb-2">
+                Original Draft
+              </label>
               <textarea
+                id="original-email"
                 required
-                className="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 text-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all resize-none min-h-[250px]"
+                className="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 text-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all resize-none min-h-[220px]"
                 placeholder="Hey guys, sorry but I can't come to the meeting today. Catch you later..."
                 value={formData.originalEmail}
                 onChange={(e) => setFormData({ ...formData, originalEmail: e.target.value })}
@@ -79,11 +92,14 @@ export default function Improve() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">Improvement Instructions (Optional)</label>
+              <label htmlFor="instructions" className="block text-sm font-medium text-slate-300 mb-2">
+                Improvement Instructions (Optional)
+              </label>
               <input
+                id="instructions"
                 type="text"
                 className="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-indigo-500 transition-all"
-                placeholder="e.g., Make it sound more polite, expand on the reason..."
+                placeholder="e.g., Make it sound more polite and executive, expand on the reason..."
                 value={formData.instructions}
                 onChange={(e) => setFormData({ ...formData, instructions: e.target.value })}
               />
@@ -92,19 +108,21 @@ export default function Improve() {
             <button
               type="submit"
               disabled={loading || !formData.originalEmail || isLimitReached}
-              className={`w-full py-4 rounded-xl text-white font-bold text-lg flex items-center justify-center gap-2 transition-all ${isLimitReached
-                ? 'bg-slate-800 cursor-not-allowed opacity-50'
-                : 'bg-linear-to-r from-indigo-600 to-purple-600 hover:shadow-lg hover:shadow-indigo-500/20'
-                }`}
+              className={`w-full py-4 rounded-xl text-white font-bold text-lg flex items-center justify-center gap-2 transition-all ${
+                isLimitReached
+                  ? 'bg-slate-800 cursor-not-allowed opacity-50'
+                  : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 hover:shadow-lg hover:shadow-indigo-500/25'
+              }`}
             >
               {loading ? (
-                <> <Loader2 className="w-5 h-5 animate-spin" /> Polishing... </>
+                <> <Loader2 className="w-5 h-5 animate-spin" /> Polishing Draft... </>
               ) : isLimitReached ? (
-                <> Limit Reached </>
+                <> Daily Limit Reached </>
               ) : (
                 <> <Sparkles className="w-5 h-5" /> Improve Email </>
               )}
             </button>
+
             {error && <p className="text-red-400 text-sm text-center mt-4">{error}</p>}
             {isLimitReached && !error && (
               <p className="text-orange-400 text-sm text-center mt-4">
@@ -112,35 +130,51 @@ export default function Improve() {
               </p>
             )}
           </form>
-        </div>
+        </section>
 
         {/* Result Area */}
-        <div className="glass-panel p-6 flex flex-col">
+        <section aria-label="Polished Draft Output" className="glass-panel p-6 flex flex-col">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-medium text-slate-200">Polished Draft</h2>
+            <h2 className="text-lg font-semibold text-slate-200">Polished Draft</h2>
             {result && (
               <button
                 onClick={copyToClipboard}
-                className="text-sm flex items-center gap-1 text-slate-400 hover:text-white transition-colors p-2"
+                className="text-sm flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors py-1 px-2.5 rounded-lg hover:bg-slate-800"
+                aria-label="Copy polished draft to clipboard"
               >
-                {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-                {copied ? 'Copied!' : 'Copy'}
+                {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                <span>{copied ? 'Copied!' : 'Copy Draft'}</span>
               </button>
             )}
           </div>
 
-          <div className="flex-grow bg-slate-950/50 rounded-xl p-4 border border-slate-800/50 text-slate-300 whitespace-pre-wrap overflow-y-auto">
+          <div className="flex-grow min-h-[280px] bg-slate-950/50 rounded-xl p-4 border border-slate-800/50 text-slate-300 whitespace-pre-wrap overflow-y-auto leading-relaxed">
             {result ? (
               result
             ) : (
-              <div className="h-full flex flex-col items-center justify-center text-slate-500">
+              <div className="h-full flex flex-col items-center justify-center text-slate-500 py-16">
                 <Sparkles className="w-12 h-12 mb-4 opacity-20" />
                 <p>Your polished email will appear here.</p>
               </div>
             )}
           </div>
-        </div>
+        </section>
       </div>
+
+      {/* Internal Navigation / Cross-linking */}
+      <aside aria-label="Related Tools" className="mt-8 p-4 rounded-xl border border-slate-800/80 bg-slate-900/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+        <div className="flex items-center gap-2 text-slate-400">
+          <Wand2 className="w-4 h-4 text-blue-400 shrink-0" />
+          <span>Starting from scratch without a rough draft?</span>
+        </div>
+        <Link
+          to="/generate"
+          className="inline-flex items-center gap-1.5 text-indigo-400 hover:text-indigo-300 font-medium whitespace-nowrap transition-colors"
+        >
+          Use AI Email Generator
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </aside>
     </div>
   );
 }

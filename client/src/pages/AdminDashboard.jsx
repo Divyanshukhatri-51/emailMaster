@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Users, Mail, Trash2, Loader2, Database } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
+import SEO from '../components/SEO';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -66,26 +67,35 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto pt-10 px-4">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-linear-to-r from-orange-400 to-red-400 mb-2 flex items-center gap-3">
+    <div className="max-w-6xl mx-auto pt-10 pb-16 px-4">
+      <SEO
+        title="Admin Dashboard"
+        description="AuraMail administration dashboard for managing platform users, usage credits, and email metrics."
+        canonical="/admin"
+        noIndex={true}
+      />
+
+      <header className="mb-8">
+        <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-400 mb-2 flex items-center gap-3">
           <Database className="w-8 h-8 text-orange-400" /> Admin Dashboard
         </h1>
-        <p className="text-slate-400">Manage users and email history.</p>
-      </div>
+        <p className="text-slate-400">Manage registered users, roles, and generated email logs.</p>
+      </header>
 
       <div className="flex gap-4 mb-6">
         <button
           onClick={() => setActiveTab('users')}
-          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${activeTab === 'users' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-            }`}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all ${
+            activeTab === 'users' ? 'bg-blue-600 text-white shadow-md shadow-blue-900/30' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+          }`}
         >
           <Users className="w-4 h-4" /> Users ({users.length})
         </button>
         <button
           onClick={() => setActiveTab('emails')}
-          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${activeTab === 'emails' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-            }`}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all ${
+            activeTab === 'emails' ? 'bg-blue-600 text-white shadow-md shadow-blue-900/30' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+          }`}
         >
           <Mail className="w-4 h-4" /> Emails ({emails.length})
         </button>
@@ -93,84 +103,94 @@ export default function AdminDashboard() {
 
       {activeTab === 'users' ? (
         <div className="glass-panel overflow-hidden">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="border-b border-slate-800 bg-slate-900/50 text-slate-300">
-                <th className="p-4 font-medium">ID</th>
-                <th className="p-4 font-medium">Email</th>
-                <th className="p-4 font-medium">Role</th>
-                <th className="p-4 font-medium">Joined</th>
-                <th className="p-4 font-medium text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((u) => (
-                <tr key={u.id} className="border-b border-slate-800/50 hover:bg-slate-800/20 transition-colors text-slate-300 text-sm">
-                  <td className="p-4 font-mono text-xs">{u.id}</td>
-                  <td className="p-4">{u.email}</td>
-                  <td className="p-4">
-                    <span className={`px-2 py-1 rounded text-xs font-semibold ${u.role === 'ADMIN' ? 'bg-orange-500/20 text-orange-400' : 'bg-slate-700/50 text-slate-300'}`}>
-                      {u.role}
-                    </span>
-                  </td>
-                  <td className="p-4">{new Date(u.createdAt).toLocaleDateString()}</td>
-                  <td className="p-4 text-right">
-                    <button
-                      onClick={() => deleteUser(u.id)}
-                      disabled={u.role === 'ADMIN'}
-                      className="p-2 bg-red-500/10 text-red-400 hover:bg-red-500/20 disabled:opacity-30 disabled:cursor-not-allowed rounded-lg transition-colors"
-                      title="Delete User"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b border-slate-800 bg-slate-900/50 text-slate-300">
+                  <th className="p-4 font-medium text-sm">ID</th>
+                  <th className="p-4 font-medium text-sm">Email</th>
+                  <th className="p-4 font-medium text-sm">Role</th>
+                  <th className="p-4 font-medium text-sm">Joined</th>
+                  <th className="p-4 font-medium text-sm text-right">Actions</th>
                 </tr>
-              ))}
-              {users.length === 0 && (
-                <tr>
-                  <td colSpan="5" className="p-8 text-center text-slate-500">No users found.</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {users.map((u) => (
+                  <tr key={u.id} className="border-b border-slate-800/50 hover:bg-slate-800/20 transition-colors text-slate-300 text-sm">
+                    <td className="p-4 font-mono text-xs">{u.id}</td>
+                    <td className="p-4 font-medium">{u.email}</td>
+                    <td className="p-4">
+                      <span className={`px-2 py-0.5 rounded text-xs font-semibold ${u.role === 'ADMIN' ? 'bg-orange-500/20 text-orange-400' : 'bg-slate-700/50 text-slate-300'}`}>
+                        {u.role}
+                      </span>
+                    </td>
+                    <td className="p-4 text-xs text-slate-400">{new Date(u.createdAt).toLocaleDateString()}</td>
+                    <td className="p-4 text-right">
+                      <button
+                        onClick={() => deleteUser(u.id)}
+                        disabled={u.role === 'ADMIN'}
+                        className="p-2 bg-red-500/10 text-red-400 hover:bg-red-500/20 disabled:opacity-30 disabled:cursor-not-allowed rounded-lg transition-colors"
+                        title="Delete User"
+                        aria-label="Delete User"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {users.length === 0 && (
+                  <tr>
+                    <td colSpan="5" className="p-8 text-center text-slate-500">No users found.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       ) : (
         <div className="glass-panel overflow-hidden">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="border-b border-slate-800 bg-slate-900/50 text-slate-300">
-                <th className="p-4 font-medium">User</th>
-                <th className="p-4 font-medium">Topic</th>
-                <th className="p-4 font-medium">Tone</th>
-                <th className="p-4 font-medium">Date</th>
-                <th className="p-4 font-medium text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {emails.map((e) => (
-                <tr key={e.id} className="border-b border-slate-800/50 hover:bg-slate-800/20 transition-colors text-slate-300 text-sm">
-                  <td className="p-4">{e.user?.email || 'Deleted User'}</td>
-                  <td className="p-4 max-w-xs truncate" title={e.topic}>{e.topic}</td>
-                  <td className="p-4">{e.tone}</td>
-                  <td className="p-4">{new Date(e.createdAt).toLocaleDateString()}</td>
-                  <td className="p-4 text-right">
-                    <button
-                      onClick={() => deleteEmail(e.id)}
-                      className="p-2 bg-red-500/10 text-red-400 hover:bg-red-500/20 rounded-lg transition-colors"
-                      title="Delete Email"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b border-slate-800 bg-slate-900/50 text-slate-300">
+                  <th className="p-4 font-medium text-sm">User</th>
+                  <th className="p-4 font-medium text-sm">Topic</th>
+                  <th className="p-4 font-medium text-sm">Tone</th>
+                  <th className="p-4 font-medium text-sm">Date</th>
+                  <th className="p-4 font-medium text-sm text-right">Actions</th>
                 </tr>
-              ))}
-              {emails.length === 0 && (
-                <tr>
-                  <td colSpan="5" className="p-8 text-center text-slate-500">No emails found.</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {emails.map((e) => (
+                  <tr key={e.id} className="border-b border-slate-800/50 hover:bg-slate-800/20 transition-colors text-slate-300 text-sm">
+                    <td className="p-4 text-sm">{e.user?.email || 'Deleted User'}</td>
+                    <td className="p-4 max-w-xs truncate text-sm" title={e.topic}>{e.topic}</td>
+                    <td className="p-4 text-xs">
+                      <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300">
+                        {e.tone}
+                      </span>
+                    </td>
+                    <td className="p-4 text-xs text-slate-400">{new Date(e.createdAt).toLocaleDateString()}</td>
+                    <td className="p-4 text-right">
+                      <button
+                        onClick={() => deleteEmail(e.id)}
+                        className="p-2 bg-red-500/10 text-red-400 hover:bg-red-500/20 rounded-lg transition-colors"
+                        title="Delete Email"
+                        aria-label="Delete Email"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {emails.length === 0 && (
+                  <tr>
+                    <td colSpan="5" className="p-8 text-center text-slate-500">No emails found.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>
